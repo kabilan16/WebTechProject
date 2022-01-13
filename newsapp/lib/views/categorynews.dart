@@ -5,28 +5,31 @@ import 'package:newsapp_project/models/categorymodel.dart';
 import 'package:newsapp_project/views/articlepage.dart';
 
 
-class CategoryArea extends StatefulWidget {
-  final String category;
-  CategoryArea({required this.category});
+class CategoryNews extends StatefulWidget {
+
+  final String newsCategory;
+
+  CategoryNews({required this.newsCategory});
+
   @override
-  _CategoryAreaState createState() => _CategoryAreaState();
+  _CategoryNewsState createState() => _CategoryNewsState();
 }
 
-class _CategoryAreaState extends State<CategoryArea> {
+class _CategoryNewsState extends State<CategoryNews> {
+  var newslist;
+  bool _loading = true;
 
-  List<ArticleModel> articles=[];
-  bool _loading=true;
   @override
   void initState() {
+    getNews();
     // TODO: implement initState
     super.initState();
   }
 
-  getCategoryAreaClass() async
-  {
-    CategoryAreaClass newsClass=CategoryAreaClass();
-    await newsClass.getNews(widget.category);
-    articles = newsClass.news;
+  void getNews() async {
+    NewsForCategory news = NewsForCategory();
+    await news.getNewsForCategory(widget.newsCategory);
+    newslist = news.news;
     setState(() {
       _loading = false;
     });
@@ -42,21 +45,23 @@ class _CategoryAreaState extends State<CategoryArea> {
       elevation: 0.0,
        ),
       body: _loading?Center(child: Container(child: CircularProgressIndicator(),)) : SingleChildScrollView(
-        child: Container(child: Column(children: [
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          child: Column(children: [
            Container(
                  padding: EdgeInsets.only(top: 16),
                  child: ListView.builder(
-                   itemCount: articles.length,
+                   itemCount: newslist.length,
                    shrinkWrap: true,
                    physics: ClampingScrollPhysics(),
                    itemBuilder: (context,index)
                    {
                      return CardBody
                      (
-                       imageUrl: articles[index].urlToImage,
-                       title: articles[index].title,
-                       content: articles[index].content,
-                       url: articles[index].url,
+                       imageUrl: newslist[index].urlToImage,
+                       title: newslist[index].title,
+                       content: newslist[index].content,
+                       url: newslist[index].url,
                      );
                    })
                ,)

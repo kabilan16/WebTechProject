@@ -9,7 +9,7 @@ import 'package:newsapp_project/assets/news.dart';
 import 'package:newsapp_project/models/articlemodel.dart';
 import 'package:newsapp_project/models/categorymodel.dart';
 import 'package:newsapp_project/views/articlepage.dart';
-import 'package:newsapp_project/views/categoryarea.dart';
+import 'package:newsapp_project/views/categorynews.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -150,7 +150,7 @@ class CardTop extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>CategoryArea(category: category.toLowerCase() ,)));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>CategoryNews(newsCategory: category.toLowerCase() ,)));
       },
           child: Container(
         
