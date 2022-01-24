@@ -20,7 +20,6 @@ class News
               url: ele["url"],
               urlToImage: ele["urlToImage"],
               content: ele["content"],
-
             );
             news.add(articleModel);
         }

@@ -38,7 +38,7 @@ class _CategoryNewsState extends State<CategoryNews> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Row(
+      appBar: AppBar(backgroundColor: Colors.black,title: Row(
         children: <Widget>[
         Text("WebTech LabProject"),
       ],), 

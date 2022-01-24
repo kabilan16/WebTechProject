@@ -16,7 +16,7 @@ class _ArticlePageState extends State<ArticlePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Row(
+      appBar: AppBar(backgroundColor: Colors.black,title: Row(
         children: <Widget>[
         Text("WebTech LabProject"),
       ],), 

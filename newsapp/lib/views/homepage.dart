@@ -6,27 +6,30 @@ import 'package:newsapp/models/articlemodel.dart';
 import 'package:newsapp/models/categorymodel.dart';*/
 import 'package:newsapp_project/assets/extras.dart';
 import 'package:newsapp_project/assets/news.dart';
+import 'package:newsapp_project/main.dart';
 import 'package:newsapp_project/models/articlemodel.dart';
 import 'package:newsapp_project/models/categorymodel.dart';
 import 'package:newsapp_project/views/articlepage.dart';
 import 'package:newsapp_project/views/categorynews.dart';
+import 'package:newsapp_project/views/thankyoupage.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Web Technologies Laboratory Project',)),
+      appBar: AppBar(title: Text('Web Technologies Laboratory Project',), backgroundColor: Colors.black,),
+      
       body: Column(
         
         children: <Widget>[  
         Container(  
-              margin: EdgeInsets.all(40.0),  
-              padding: EdgeInsets.all(12.0),  
+              margin: EdgeInsets.only(top:120,left: 40,right: 40, bottom: 80),  
+              padding: EdgeInsets.all(14.0),  
               decoration:BoxDecoration(  
                   borderRadius:BorderRadius.circular(8),  
                   color:Colors.red  
               ),  
-              child: Text("Welcome to our News Application",style: TextStyle(color:Colors.white,fontSize:19),),  
+              child: Text("Welcome to our InstantNews App",style: TextStyle(color:Colors.white,fontSize:19),),  
             ),  
         Container(  
               margin: EdgeInsets.all(30.0),  
@@ -67,6 +70,12 @@ class NewScreen extends StatefulWidget {
 }
 
 class _NewScreenState extends State<NewScreen> {
+  void _navigateToHomeScreen(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyApp()));
+  }
+  void _navigateToThankYouScreen(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ThankYou()));
+  }
   List<CategoryModel> categories=<CategoryModel>[];
   List<ArticleModel> articles=<ArticleModel>[];
   bool _loading=true;
@@ -90,11 +99,31 @@ class _NewScreenState extends State<NewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Row(
+      appBar: AppBar(backgroundColor: Colors.black,title: Row(
         children: <Widget>[
         Text("WebTech LabProject"),
       ],), 
       elevation: 0.0,
+      actions: <Widget>[
+    IconButton(
+      icon: Icon(
+        Icons.home,
+        color: Colors.white,
+      ),
+      onPressed: () {
+        _navigateToHomeScreen(context);
+      },
+    ),
+    IconButton(
+      icon: Icon(
+        Icons.contact_page,
+        color: Colors.white,
+      ),
+      onPressed: () {
+        _navigateToThankYouScreen(context);
+      },
+    )
+  ],
        ),
       body: _loading?Center(child: Container(child: CircularProgressIndicator(),)) :
       SingleChildScrollView(
@@ -152,9 +181,9 @@ class CardTop extends StatelessWidget {
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context)=>CategoryNews(newsCategory: category.toLowerCase() ,)));
       },
-          child: Container(
+        child: Container(
         
-        margin: EdgeInsets.only(right: 16,top: 5),
+        margin: EdgeInsets.only(right: 16,top: 12),
         child: Stack(
           children: <Widget>
           [
@@ -206,7 +235,7 @@ class CardBody extends StatelessWidget {
           child:Image.network(imageUrl.toString()),
           ),
           SizedBox(height: 8,),
-          Text(title.toString(), style: TextStyle(fontSize: 17,fontWeight: FontWeight.w600
+          Text(title.toString(), style: TextStyle(fontSize: 17,fontWeight: FontWeight.w600,
           ),),
           SizedBox(height: 8,),
           Text(content.toString(), style: TextStyle(color: Colors.grey),)
