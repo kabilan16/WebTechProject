@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp_project/assets/news.dart';
+import 'package:newsapp_project/main.dart';
 import 'package:newsapp_project/models/articlemodel.dart';
 import 'package:newsapp_project/models/categorymodel.dart';
 import 'package:newsapp_project/views/articlepage.dart';
+import 'package:newsapp_project/views/thankyoupage.dart';
 
 
 class CategoryNews extends StatefulWidget {
@@ -34,11 +36,35 @@ class _CategoryNewsState extends State<CategoryNews> {
       _loading = false;
     });
   }
-
+  void _navigateToHomeScreen(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyApp()));
+  }
+  void _navigateToThankYouScreen(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ThankYou()));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.black,title: Row(
+      appBar: AppBar(actions: <Widget>[
+    IconButton(
+      icon: Icon(
+        Icons.home,
+        color: Colors.white,
+      ),
+      onPressed: () {
+        _navigateToHomeScreen(context);
+      },
+    ),
+    IconButton(
+      icon: Icon(
+        Icons.contact_page,
+        color: Colors.white,
+      ),
+      onPressed: () {
+        _navigateToThankYouScreen(context);
+      },
+    )
+  ],backgroundColor: Colors.black,title: Row(
         children: <Widget>[
         Text("WebTech LabProject"),
       ],), 
